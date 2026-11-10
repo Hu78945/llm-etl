@@ -1,0 +1,152 @@
+{
+  "extraction": [
+    {
+      "extractor": "rules:v1",
+      "overall": {
+        "records": 50,
+        "extracted": 41,
+        "field_accuracy": {
+          "title": 0.7,
+          "seniority": 0.82,
+          "salary_min": 0.76,
+          "salary_max": 0.76,
+          "salary_currency": 0.76,
+          "remote_policy": 0.82,
+          "location": 0.76
+        },
+        "skills": {
+          "precision": 1.0,
+          "recall": 0.792,
+          "f1": 0.8839,
+          "exact_set_accuracy": 0.76
+        }
+      },
+      "longtail": {
+        "records": 15,
+        "extracted": 6,
+        "field_accuracy": {
+          "title": 0.0,
+          "seniority": 0.4,
+          "salary_min": 0.2,
+          "salary_max": 0.2,
+          "salary_currency": 0.2,
+          "remote_policy": 0.4,
+          "location": 0.2
+        },
+        "skills": {
+          "precision": 1.0,
+          "recall": 0.3049,
+          "f1": 0.4673,
+          "exact_set_accuracy": 0.2
+        }
+      },
+      "standard": {
+        "records": 35,
+        "extracted": 35,
+        "field_accuracy": {
+          "title": 1.0,
+          "seniority": 1.0,
+          "salary_min": 1.0,
+          "salary_max": 1.0,
+          "salary_currency": 1.0,
+          "remote_policy": 1.0,
+          "location": 1.0
+        },
+        "skills": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_set_accuracy": 1.0
+        }
+      }
+    }
+  ],
+  "llm_usage": [
+    {
+      "extractor": "rules:v1",
+      "records": 642,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "avg_attempts": 1.0
+    }
+  ],
+  "dedup": {
+    "ground_truth_duplicates": 60,
+    "threshold": 0.86,
+    "flagged": 60,
+    "true_positives": 60,
+    "false_positives": 0,
+    "missed": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "correct_original": 60,
+    "min_duplicate_similarity": 0.919,
+    "max_non_duplicate_similarity": 0.7978,
+    "sweep": {
+      "0.8": {
+        "flagged": 60,
+        "true_positives": 60,
+        "false_positives": 0,
+        "missed": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "correct_original": 60
+      },
+      "0.85": {
+        "flagged": 60,
+        "true_positives": 60,
+        "false_positives": 0,
+        "missed": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "correct_original": 60
+      },
+      "0.88": {
+        "flagged": 60,
+        "true_positives": 60,
+        "false_positives": 0,
+        "missed": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "correct_original": 60
+      },
+      "0.9": {
+        "flagged": 60,
+        "true_positives": 60,
+        "false_positives": 0,
+        "missed": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "correct_original": 60
+      },
+      "0.92": {
+        "flagged": 59,
+        "true_positives": 59,
+        "false_positives": 0,
+        "missed": 1,
+        "precision": 1.0,
+        "recall": 0.9833,
+        "correct_original": 59
+      },
+      "0.95": {
+        "flagged": 55,
+        "true_positives": 55,
+        "false_positives": 0,
+        "missed": 5,
+        "precision": 1.0,
+        "recall": 0.9167,
+        "correct_original": 55
+      }
+    }
+  },
+  "quarantine": {
+    "ground_truth_invalid": 12,
+    "quarantined": 69,
+    "invalid_caught": 12,
+    "valid_quarantined": 57,
+    "valid_quarantined_reasons": {
+      "remote_policy: Input should be 'remote', 'hybrid' or 'onsite'": 57
+    }
+  }
+}

@@ -1,0 +1,18 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install (Python 3.12, dev + airflow groups)
+        run: uv sync --all-groups --python 3.12
+      - name: Lint + tests (incl. Airflow DAG import and dbt build on a temp warehouse)
+        run: make test
+      - name: End-to-end pipeline (offline extractor)
+        run: make run
