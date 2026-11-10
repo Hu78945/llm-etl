@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: bronze
+    tables:
+      - name: raw_postings
+        description: Raw job-board feed, one row per posting, upserted incrementally.
+        columns:
+          - name: posting_id
+            data_tests: [unique, not_null]
+          - name: content_hash
+            data_tests: [not_null]
+
+  - name: silver
+    schema: silver
+    tables:
+      - name: extracted_postings
+        description: Postings that passed strict Pydantic validation (duplicates excluded).
+        columns:
+          - name: posting_id
+            data_tests:
+              - unique
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('bronze', 'raw_postings')
+                    field: posting_id
+      - name: duplicates
+        description: Near-duplicate reposts found by embedding similarity.
+        columns:
+          - name: posting_id
+            data_tests: [unique, not_null]
+          - name: duplicate_of
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    to: source('bronze', 'raw_postings')
+                    field: posting_id
+      - name: quarantine
+        description: Postings whose extraction failed validation, with the reason.
+        columns:
+          - name: posting_id
+            data_tests: [unique, not_null]
+          - name: error
+            data_tests: [not_null]

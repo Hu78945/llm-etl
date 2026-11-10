@@ -1,0 +1,9 @@
+# Local target. The warehouse path is set by the pipeline (absolute); when running dbt by hand
+# from the repo root the default below resolves to the same file.
+llm_etl:
+  target: duckdb
+  outputs:
+    duckdb:
+      type: duckdb
+      path: "{{ env_var('LLM_ETL_DUCKDB', 'warehouse/llm_etl.duckdb') }}"
+      threads: 4

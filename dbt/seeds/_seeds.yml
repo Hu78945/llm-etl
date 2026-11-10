@@ -1,0 +1,17 @@
+version: 2
+
+seeds:
+  - name: skill_taxonomy
+    description: Canonical skills, category and surface aliases. Also read by the Python extractors.
+    columns:
+      - name: skill
+        data_tests: [unique, not_null]
+      - name: category
+        data_tests: [not_null]
+  - name: fx_rates
+    description: Static FX snapshot used to normalise salaries to USD for cross-market comparison.
+    columns:
+      - name: currency
+        data_tests: [unique, not_null]
+      - name: usd_per_unit
+        data_tests: [not_null]

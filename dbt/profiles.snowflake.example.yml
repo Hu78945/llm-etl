@@ -1,0 +1,21 @@
+# Snowflake target for the same dbt project. Copy into ~/.dbt/profiles.yml (or merge into
+# dbt/profiles.yml) and run:  dbt build --target snowflake
+#
+# Prerequisite: the bronze/silver tables exist in Snowflake under the same names
+# (BRONZE.RAW_POSTINGS, SILVER.EXTRACTED_POSTINGS with SKILLS as ARRAY, SILVER.DUPLICATES,
+# SILVER.QUARANTINE) - e.g. loaded from Parquet via a stage + COPY INTO, or by pointing the
+# Python loaders at Snowflake. Adapter-specific SQL (array unnesting) is isolated in
+# macros/unnest_skills.sql via adapter.dispatch, so models need no changes.
+llm_etl:
+  target: snowflake
+  outputs:
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'TRANSFORMING') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'LLM_ETL') }}"
+      schema: PUBLIC
+      threads: 8

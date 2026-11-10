@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_postings
+    description: Gold fact table - one row per unique, valid posting with USD-normalised salary.
+    columns:
+      - name: posting_id
+        data_tests: [unique, not_null]
+      - name: skill_count
+        data_tests: [not_null]
+
+  - name: dim_skills
+    columns:
+      - name: skill
+        data_tests: [unique, not_null]
+
+  - name: mart_skill_demand_by_seniority
+    description: Which skills each seniority level asks for, as a share of that level's postings.
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "seniority || ':' || skill"
+    columns:
+      - name: seniority
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [junior, mid, senior, staff, lead]
+      - name: skill
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_skills')
+                field: skill
+
+  - name: mart_salary_bands
+    description: p25 / median / p75 annual salary (USD) per seniority level.
+    columns:
+      - name: seniority
+        data_tests: [unique, not_null]

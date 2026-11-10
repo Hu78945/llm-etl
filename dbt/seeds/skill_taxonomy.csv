@@ -1,0 +1,31 @@
+skill,category,aliases
+python,language,Python
+sql,language,SQL
+scala,language,Scala
+java,language,Java
+spark,processing,Spark|PySpark|Apache Spark
+kafka,processing,Kafka|Apache Kafka
+airflow,orchestration,Airflow|Apache Airflow
+dbt,transformation,dbt|data build tool
+fivetran,ingestion,Fivetran
+azure data factory,ingestion,Azure Data Factory|ADF
+snowflake,warehouse,Snowflake
+databricks,warehouse,Databricks
+bigquery,warehouse,BigQuery
+redshift,warehouse,Redshift
+postgresql,database,PostgreSQL|Postgres
+aws,cloud,AWS|Amazon Web Services
+azure,cloud,Azure|Microsoft Azure
+gcp,cloud,GCP|Google Cloud
+docker,devops,Docker
+kubernetes,devops,Kubernetes|k8s
+terraform,devops,Terraform
+git,devops,Git
+pytorch,ml,PyTorch
+tensorflow,ml,TensorFlow
+mlflow,ml,MLflow
+llms,ml,LLMs|large language models
+langchain,ml,LangChain
+tableau,bi,Tableau
+power bi,bi,Power BI
+looker,bi,Looker
